@@ -10,7 +10,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-
+echo "Please enter the password"
+read -s mysql_root_password
 if [ $USERID -ne 0 ]
 then
     echo -e "Please Connect To $R SUDO USER $N"
@@ -45,12 +46,12 @@ VALIDATE $? "Starting mysqld service"
 # In order to handle the Idempotent of shell script to avoid executing multiple times of mysql server password
 # set connectivity 
 
-mysql -h db.somustack.online -uroot -pExpenseApp@1 -e "SHOW DATABASES" &>>$LOGFILE
+mysql -h db.somustack.online -uroot -p${mysql_root_password} -e "SHOW DATABASES" &>>$LOGFILE
 
 if [ $? -eq 0 ]
 then
     echo -e "The ROOT Password $Y ALREADY CONFIGURED $G NO ACTION TO BE PERFORMED $N "
 else
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>LOGFILE
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>LOGFILE
     VALIDATE $? "Setting Up $Y ROOT PASSWORD $N"
 fi
