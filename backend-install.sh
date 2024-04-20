@@ -46,7 +46,6 @@ id expense &>>$LOGFILE
 if [ $? -eq 0 ]
 then
     echo -e "The UserID Already $G Created..$N"
-    exit 1;
 else
     useradd expense &>>$LOGFILE
     VALIDATE $? "Creating UserID"
