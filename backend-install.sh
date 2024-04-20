@@ -10,8 +10,6 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-echo "Please Enter Password:"
-read -s mysql_password
 
 if [ $USERID -ne 0 ]
 then
