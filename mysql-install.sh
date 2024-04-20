@@ -21,7 +21,7 @@ fi
 
 VALIDATE()
 {
-    if [ $1 -nq 0 ]
+    if [ $1 -ne 0 ]
     then
         echo -e "The Action $2 $R Failed $N"
         exit 1;
