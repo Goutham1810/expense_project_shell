@@ -12,6 +12,7 @@ Y="\e[33m"
 N="\e[0m"
 echo "Please Enter Password:"
 read -s mysql_root_password
+
 if [ $USERID -ne 0 ]
 then
     echo -e "Please Connect To $R SUDO USER $N"
