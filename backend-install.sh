@@ -67,7 +67,7 @@ npm install &>>$LOGFILE
 VALIDATE $? "NodeJS Installation"
 
 #check your repo and path
-cp /c/Users/GOUTHAM/expense_project_shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
+cp /home/ec2-user/expense_project_shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
 VALIDATE $? "Copy backend service"
 
 systemctl daemon-reload &>>$LOGFILE
