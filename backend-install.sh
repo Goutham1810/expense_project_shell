@@ -40,7 +40,7 @@ dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing NodeJS"
 
 id_value=$(id expense)
-if [ id_value -eq 0 ]
+if [ $id_value -eq 0 ]
 then
     echo "The UserID Already $G Created..$N"
     exit 1;
