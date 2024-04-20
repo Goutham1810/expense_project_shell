@@ -10,8 +10,6 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-echo "Please Enter Password:"
-read -s mysql_root_password
 
 if [ $USERID -ne 0 ]
 then
@@ -42,13 +40,15 @@ systemctl start nginx &>>$LOGFILE
 VALIDATE $? "Starting NGINX"
 
 rm -rf /usr/share/nginx/html/*
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
 VALIDATE $? "Downloading Front-end Code"
 
 cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "Extraction of Frontend"
 
-cp 
-systemctl restart backend &>>$LOGFILE
-VALIDATE $? "Restarting Backend"
+cp /home/ec2-user/expense_project_shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+VALIDATE $? "Copy Configurations"
+
+systemctl restart nginx &>>$LOGFILE
+VALIDATE $? "Restarting NGINX"
