@@ -10,6 +10,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+echo "Please Enter Password:"
+read -s mysql_password
 
 if [ $USERID -ne 0 ]
 then
@@ -31,11 +33,10 @@ VALIDATE()
 }
 
 dnf module disable nodejs -y &>>$LOGFILE
-VALIDATE $? "Installation of Mysql Server"
+VALIDATE $? "Disabling the NodeJs Service"
 
-systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "Enabling mysqld service"
+dnf module enable nodejs:20 -y &>>$LOGFILE
+VALIDATE $? "Enabling NodeJs 20 Version "
 
-systemctl start mysqld &>>$LOGFILE
-VALIDATE $? "Starting mysqld service"
-
+dnf install nodejs -y &>>$LOGFILE
+VALIDATE $? "Installing NodeJS"
